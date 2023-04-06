@@ -21,7 +21,7 @@
 #define IDLE_SPEED 10  // below this wpm value your animation will idle
 // #define PREP_FRAMES 1 // uncomment if >1
 #define TAP_FRAMES 2
-#define ANIM_WPM_LOWER 20  // above this wpm value typing animation to trigger
+#define ANIM_WPM_LOWER 1  // above this wpm value typing animation to trigger
 #define ANIM_FRAME_DURATION_MAX 450 // longest animation duration in ms
 #define ANIM_FRAME_DURATION_MIN 100 // shortest animation duration in ms
 #define IDLE_FRAME_DURATION 300  // how long each frame lasts in ms
@@ -367,7 +367,7 @@ void render_bongocat(void) {
         bongo_sleep = timer_read32();
     } else {
         if (timer_elapsed32(bongo_sleep) > OLED_TIMEOUT) {
-            oled_off();
+            oled_on();
         } else {
             if (timer_elapsed32(bongo_timer) > IDLE_FRAME_DURATION) {
                 bongo_timer = timer_read32();
