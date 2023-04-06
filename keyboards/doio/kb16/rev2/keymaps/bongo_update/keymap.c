@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     /*  Row:    0         1        2        3         4      */
     [_BASE] = LAYOUT(
-                KC_PDOT,      KC_PSLS,    KC_PAST,    KC_PMNS,     KC_MPLY,
+                KC_PDOT,      KC_PSLS,    KC_PAST,    KC_PMNS,     KC_NUM,
                 KC_P7,        KC_P8,      KC_P9,      KC_PPLS,     TO(_FN),
                 KC_P4,        KC_P5,      KC_P6,      KC_PENT,     KC_MUTE,
                 KC_P1,        KC_P2,      KC_P3,      KC_P0
@@ -126,10 +126,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         led_t led_usb_state = host_keyboard_led_state();
 
         render_bongocat();
-        oled_set_cursor(14, 0);                                // sets cursor to (column, row) using charactar spacing (4 rows on 128x32 screen, anything more will overflow back to the top)
-        oled_write_P(PSTR("WPM:"), false);
-        oled_write(get_u8_str(get_current_wpm(), '0'), false); // writes wpm on top right corner of string
-        oled_set_cursor(17, 2);
+        oled_set_cursor(17, 1);                                // sets cursor to (column, row) using charactar spacing (4 rows on 128x32 screen, anything more will overflow back to the top)
+        //oled_write_P(PSTR("WPM:"), false);
+        //oled_write(get_u8_str(get_current_wpm(), '0'), false); // writes wpm on top right corner of string
+        oled_write_P(led_usb_state.num_lock ? PSTR("NUM") : PSTR("    "), false);
+		oled_set_cursor(17, 2);
         oled_write_P(led_usb_state.caps_lock ? PSTR("CAPS") : PSTR("    "), false);
         oled_set_cursor(17, 3);
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRL") : PSTR("    "), false);
